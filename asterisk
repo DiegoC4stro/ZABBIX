@@ -1,0 +1,33 @@
+##################################################################################
+#              Desenvolvido por: Diego Castro                                    #
+#              email: dctecsolution@gmail.com                                    #
+#              MONITORAMENTO SIP DO ASTERISK                                     #
+#              CHAMADAS ATIVAS                                                   #
+#              RAMAIS ON                                                         #
+#              RAMAIS OFF                                                        #
+##################################################################################             
+
+
+root@s-3:~# cat /etc/zabbix/zabbix_agentd.conf
+UserParameter=chamadas.ativas, /sbin/asterisk.chamadasativas.sh
+UserParameter=ramais.on, /sbin/asterisk.ramaison.sh
+UserParameter=ramais.off, /sbin/asterisk.ramaisoff.sh
+
+root@s-3:~#
+chmod zabbix. /var/run/asterisk/asterisk.ctl
+chmod zabbix. /var/run/asterisk/asterisk.pid
+
+/sbin/asterisk.chamadasativas.sh
+#!/bin/bash
+call=$(/usr/sbin/asterisk -rx "core show channels" | grep  active | tail -n1 | cut -d' ' -f1)
+echo $call
+
+/sbin/asterisk.ramaisoff.sh
+#!/bin/bash
+off=$(/usr/sbin/asterisk -rx "sip show peers" | grep  online | tail -n1 | cut -d' ' -f7)
+echo $off
+
+/sbin/asterisk.ramaison.sh
+#!/bin/bash
+on=$(/usr/sbin/asterisk -rx "sip show peers" | tail -n1 | cut -d' ' -f5)
+echo $on
