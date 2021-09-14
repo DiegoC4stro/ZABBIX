@@ -31,3 +31,7 @@ echo $off
 #!/bin/bash
 on=$(/usr/sbin/asterisk -rx "sip show peers" | tail -n1 | cut -d' ' -f5)
 echo $on
+
+/sbin/asterisk.uptime.sh
+#!/bin/bash
+asterisk -x "core show uptime seconds" | grep uptime | awk -F " " '{ print $3 }'
