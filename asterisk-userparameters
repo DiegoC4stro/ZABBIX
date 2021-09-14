@@ -12,6 +12,10 @@ root@s-3:~# cat /etc/zabbix/zabbix_agentd.conf
 UserParameter=chamadas.ativas, /sbin/asterisk.chamadasativas.sh
 UserParameter=ramais.on, /sbin/asterisk.ramaison.sh
 UserParameter=ramais.off, /sbin/asterisk.ramaisoff.sh
+UserParameter=uptime.asterisk, /sbin/asterisk.uptime.sh
+UserParameter=reload.asterisk, /sbin/asterisk.reload.sh
+UserParameter=versio.asterisk, /sbin/asterisk.version.sh
+UserParameter=clock.asterisk, /sbin/clock.asterisk.sh
 
 root@s-3:~#
 chmod zabbix. /var/run/asterisk/asterisk.ctl
@@ -35,3 +39,12 @@ echo $on
 /sbin/asterisk.uptime.sh
 #!/bin/bash
 asterisk -x "core show uptime seconds" | grep uptime | awk -F " " '{ print $3 }'
+
+/sbin/asterisk.reload.sh
+#!/bin/bash
+asterisk -x "core show uptime seconds"  | grep reload | awk -F ":" '{ print $2 }'
+
+/sbin/asterisk.version.sh
+#!/bin/bash
+asterisk -x "core show version" | grep Asterisk | awk '{ print $2 }'
+
