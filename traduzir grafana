@@ -1,0 +1,94 @@
+#!/bin/bash
+
+# echo "Backup em /usr/share/grafana/public/backup"
+sudo cp -r /usr/share/grafana/public/build/ /usr/share/grafana/public/backup/
+cd /usr/share/grafana/public/build
+
+echo "Iniciando traducao para portugues..."
+
+# TimePicker
+sed -i 's/"Last 5 minutes"/"Ultimos 5 minutos"/g' app*.js*
+sed -i 's/"Last 15 minutes"/"Ultimos 15 minutos"/g' app*.js*
+sed -i 's/"Last 30 minutes"/"Ultimos 30 minutos"/g' app*.js*
+sed -i 's/"Last 1 hour"/"Ultima hora"/g' app*.js*
+sed -i 's/"Last 3 hours"/"Ultimas 3 horas"/g' app*.js*
+sed -i 's/"Last 6 hours"/"Ultimas 6 horas"/g' app*.js*
+sed -i 's/"Last 12 hours"/"Ultimas 12 horas"/g' app*.js*
+sed -i 's/"Last 24 hours"/"Ultimas 24 horas"/g' app*.js*
+sed -i 's/"Last 2 days"/"Ultimos 2 dias"/g' app*.js*
+sed -i 's/"Last 7 days"/"Ultimos 7 dias"/g' app*.js*
+sed -i 's/"Last 30 days"/"Ultimos 30 dias"/g' app*.js*
+sed -i 's/"Last 90 days"/"Ultimos 90 dias"/g' app*.js*
+sed -i 's/"Last 6 months"/"Ultimos 6 mes"/g' app*.js*
+sed -i 's/"Last 1 year"/"Ultimo ano"/g' app*.js*
+sed -i 's/"Last 2 years"/"Ultimos 2 anos"/g' app*.js*
+sed -i 's/"Last 5 years"/"Ultimos 5 anos"/g' app*.js*
+sed -i 's/"Yesterday"/"Ontem"/g' app*.js*
+sed -i 's/"Day before yesterday"/"Anteontem"/g' app*.js*
+sed -i 's/"This day last week"/"Este dia semana passada"/g' app*.js*
+sed -i 's/"Previous week"/"Semana passada"/g' app*.js*
+sed -i 's/"Previous month"/"Mes passado"/g' app*.js*
+sed -i 's/"Previous year"/"Ano anterior"/g' app*.js*
+sed -i 's/"Today"/"Hoje"/g' app*.js*
+sed -i 's/"Today so far"/"Hoje até agora'\''hora atual"/g' app*.js*
+sed -i 's/"This week"/"Esta semana"/g' app*.js*
+sed -i 's/"This week so far"/"Esta semana até agora'\''hora atual"/g' app*.js*
+sed -i 's/"This month"/"Este mes"/g' app*.js*
+sed -i 's/"This month so far"/"Este mes até agora'\''hora atual"/g' app*.js*
+sed -i 's/"This year"/"Este'\''ano"/g' app*.js*
+sed -i 's/"This year so far"/"Este'\''ate agora'\''hora atual"/g' app*.js*
+sed -i 's/"Next 30 minutes"/"Proximos 30 minutos"/g' app*.js*
+
+sed -i 's/title:"Recently used absolute ranges"/title:"Intervalos absolutos usados recentemente"/g' app*.js*
+sed -i 's/title:"Relative time ranges"/title:"Intervalos relativos"/g' app*.js*
+sed -i 's/(d,null,"Absolute time range")/(d,null,"Intervalo absoluto")/g' app*.js*
+sed -i 's/"Apply time range"/"Aplicar intervalo"/g' app*.js*
+sed -i 's/"Browser Time"/"Hora do navegador"/g' app*.js*
+sed -i 's/"Change time zone"/"Trocar fuso horário"/g' app*.js*
+sed -i 's/"Other quick ranges"/"Outro intervalo"/g' app*.js*
+sed -i 's/"From"/"De"/g' app*.js*
+sed -i 's/"To"/"Para"/g' app*.js*
+
+sed -i 's/"Local browser time"/"Fuso horario local"/g' app*.js*
+
+# Login page
+sed -i 's/"Welcome to Grafana"/"Bem vindo a Empresa"/g' app*.js*
+sed -i 's/"Your single pane of glass"/"O seu unico painel | Powered by Empresa"/g' app*.js*
+sed -i 's/"Built better together"/"Fazendo um amanha melhor | Powered by Empresa"/g' app*.js*
+sed -i 's/"Democratising data"/"Analise de dados | Powered by Empresa"/g' app*.js*
+
+sed -i 's/"Email or username"/"Email ou usuario"/g' app*.js*
+sed -i 's/"Password"/"Senha"/g' app*.js*
+sed -i 's/"Forgot your password?"/"Esqueceu a senha?"/g' app*.js*
+sed -i 's/"Log in"/"Entrar"/g' app*.js*
+sed -i 's/"Logged in"/"Inicio"/g' app*.js*
+
+sed -i 's/"Logging in..."/"Acessando..."/g' app*.js*
+sed -i 's/"Email or username is required"/"Email ou usuario obrigatorio"/g' app*.js*
+sed -i 's/"Password is required"/"Senha obrigatoria"/g' app*.js*
+
+
+sed -i 's/"Jan"/"Jan"/g' app*.js*
+sed -i 's/"Feb"/"Fev"/g' app*.js*
+sed -i 's/"Mar"/"Mar"/g' app*.js*
+sed -i 's/"Apr"/"Abr"/g' app*.js*
+sed -i 's/"May"/"Mai"/g' app*.js*
+sed -i 's/"Jun"/"Jun"/g' app*.js*
+sed -i 's/"Jul"/"Jul"/g' app*.js*
+sed -i 's/"Aug"/"Ago"/g' app*.js*
+sed -i 's/"Sep"/"Set"/g' app*.js*
+sed -i 's/"Oct"/"Out"/g' app*.js*
+sed -i 's/"Nov"/"Nov"/g' app*.js*
+sed -i 's/"Dec"/"Dez"/g' app*.js*
+
+sed -i 's/"Mon"/"Seg"/g' app*.js*
+sed -i 's/"Tue"/"Ter"/g' app*.js*
+sed -i 's/"Wed"/"Qua"/g' app*.js*
+sed -i 's/"Thu"/"Qui"/g' app*.js*
+sed -i 's/"Fri"/"Sex"/g' app*.js*
+sed -i 's/"Sat"/"Sab"/g' app*.js*
+sed -i 's/"Sun"/"Dom"/g' app*.js*
+
+sleep 5
+sudo service grafana-server restart
+echo "Traducao concluida! Limpe o cache do navegador! (CTRL+F5)"
